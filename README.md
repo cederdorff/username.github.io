@@ -36,14 +36,15 @@ Guiden antager, at du allerede har:
 
 - Node.js og `npm`
 - VS Code
+- GitHub Desktop
 - en GitHub-konto
 
-Du skal arbejde i terminalen, i VS Code og på GitHub undervejs.
+Du skal arbejde i GitHub, GitHub Desktop, VS Code og terminalen i VS Code undervejs.
 
 ## Overblik over processen
 
 1. Opret et GitHub-repository med navnet `[dit-brugernavn].github.io`.
-2. Klon repoet til din computer.
+2. Klon repoet med GitHub Desktop.
 3. Opret et React-projekt med Vite.
 4. Tilføj sider og navigation med React Router.
 5. Tilføj dine projekter i en JSON-fil.
@@ -52,91 +53,140 @@ Du skal arbejde i terminalen, i VS Code og på GitHub undervejs.
 
 ## 1. Opret dit repository på GitHub
 
-Opret et nyt repository på GitHub med navnet:
+Gå til GitHub og opret et nyt repository.
+
+Repository-navnet skal være dit GitHub-brugernavn efterfulgt af `.github.io`:
 
 ```text
 [dit-brugernavn].github.io
 ```
 
-Eksempel:
-
-```text
-cederdorff.github.io
-```
-
-Hvis dit GitHub-brugernavn er `sofieholm`, skal repoet altså hedde:
+Hvis dit GitHub-brugernavn er `sofieholm`, skal repository-navnet være:
 
 ```text
 sofieholm.github.io
 ```
 
-Når repoet hedder præcis sådan, bliver din portfolio tilgængelig på:
+Det navn er vigtigt, fordi GitHub Pages så automatisk udgiver din portfolio på:
 
 ```text
 https://[dit-brugernavn].github.io
 ```
 
-Eksempel:
+Vælg:
 
-```text
-https://sofieholm.github.io
-```
+- `Public`
 
-Vælg gerne:
+Klik derefter på `Create repository`.
 
-- Public repository
+## 2. Klon repoet med GitHub Desktop
 
-## 2. Klon repoet og åbn det i VS Code
+Når repositoryet er oprettet på GitHub, skal du hente det ned på din computer.
 
-Kør i terminalen:
+Gør sådan:
 
-```bash
-git clone https://github.com/[dit-brugernavn]/[dit-brugernavn].github.io.git
-cd [dit-brugernavn].github.io
-code .
-```
+1. Gå ind på dit nye repository på GitHub.
+2. Klik på den grønne `Code`-knap.
+3. Vælg `Open with GitHub Desktop`.
+4. GitHub Desktop åbner nu repositoryet.
+5. Vælg, hvor projektmappen skal ligge på din computer.
+6. Klik på `Clone`.
 
-Eksempel:
+Når repoet er klonet:
 
-```bash
-git clone https://github.com/sofieholm/sofieholm.github.io.git
-cd sofieholm.github.io
-code .
-```
+1. Klik på `Open in Visual Studio Code` i GitHub Desktop.
+2. Projektet åbner nu i VS Code.
+
+Fra nu af arbejder du i VS Code. GitHub Desktop bruges senere til at committe og pushe dine ændringer.
 
 ## 3. Opret React-projekt med Vite
 
-Kør denne kommando inde i repo-mappen:
+Åbn terminalen i VS Code:
+
+```text
+Terminal -> New Terminal
+```
+
+Terminalen skal stå i din portfolio-mappe. Mappen hedder typisk det samme som dit repository:
+
+```text
+[dit-brugernavn].github.io
+```
+
+Kør denne kommando:
 
 ```bash
 npm create vite@latest .
 ```
 
+Vigtigt: punktummet til sidst skal med.
+
+Punktummet betyder: opret React-projektet i den mappe, du allerede står i.
+
+Hvis du glemmer punktummet, kan du komme til at oprette en ekstra mappe inde i din portfolio-mappe. Det giver en besværlig struktur som:
+
+```text
+sofieholm.github.io/
+  sofieholm.github.io/
+    src/
+    package.json
+```
+
+Den struktur skal du undgå. Den rigtige struktur er:
+
+```text
+sofieholm.github.io/
+  src/
+  public/
+  package.json
+```
+
+Når Vite stiller spørgsmål i terminalen, skal du vælge:
+
+Brug piletasterne til at vælge og tryk `Enter` for at bekræfte.
+
+```text
+Need to install the following packages:
+create-vite@...
+Ok to proceed? (y)
+```
+
+Skriv `y` og tryk `Enter`.
+
+Hvis terminalen skriver:
+
+```text
+Current directory is not empty. Please choose how to proceed:
+```
+
 Vælg:
 
-- Framework: `React`
-- Variant: `JavaScript`
-
-Hvis Vite spørger, hvad den skal gøre, fordi mappen ikke er tom:
-
-- vælg at ignorere eksisterende filer og fortsætte
-
-Installer derefter dependencies:
-
-```bash
-npm install
+```text
+Ignore files and continue
 ```
 
-Start projektet:
+Vælg derefter:
 
-```bash
-npm run dev
+```text
+Select a framework: React
+Select a variant: JavaScript
+Use ESLint instead of Oxlint? No (Oxlint)
+Install with npm and start now? Yes
 ```
+
+Når du vælger `Yes` til `Install with npm and start now?`, installerer Vite automatisk dependencies og starter projektet.
 
 Åbn den lokale URL i browseren. Den er typisk:
 
 ```text
 http://localhost:5173
+```
+
+Hvis du valgte `No` til `Install with npm and start now?`, skal du selv køre:
+
+```bash
+npm install
+npm run dev
 ```
 
 Checkpoint:
@@ -171,8 +221,10 @@ npm run dev
 Installer React Router:
 
 ```bash
-npm install react-router-dom
+npm install react-router
 ```
+
+Vi bruger pakken `react-router`. I nyere React Router skal du ikke installere eller importere fra `react-router-dom`.
 
 Opret en mappe til sider:
 
@@ -208,7 +260,7 @@ Opdater `src/main.jsx`:
 ```jsx
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { HashRouter } from "react-router-dom";
+import { HashRouter } from "react-router";
 import App from "./App";
 import "./index.css";
 
@@ -224,7 +276,7 @@ createRoot(document.getElementById("root")).render(
 Opdater `src/App.jsx`:
 
 ```jsx
-import { NavLink, Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes } from "react-router";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
@@ -278,7 +330,8 @@ function Home() {
       <p className="eyebrow">Portfolio</p>
       <h1>Hej, jeg hedder Dit Navn.</h1>
       <p>
-        Jeg arbejder med frontend, design og digitale produkter. Her kan du se nogle af de projekter, jeg har lavet.
+        Jeg arbejder med frontend, design og digitale produkter. Her kan du se
+        nogle af de projekter, jeg har lavet.
       </p>
     </section>
   );
@@ -294,7 +347,10 @@ function About() {
   return (
     <section className="page">
       <h1>Om mig</h1>
-      <p>Skriv kort om, hvem du er, hvad du er nysgerrig på, og hvilke typer projekter du gerne vil arbejde med.</p>
+      <p>
+        Skriv kort om, hvem du er, hvad du er nysgerrig på, og hvilke typer
+        projekter du gerne vil arbejde med.
+      </p>
     </section>
   );
 }
@@ -392,7 +448,7 @@ Opdater `src/pages/Projects.jsx`:
 
 ```jsx
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -414,7 +470,10 @@ function Projects() {
       <div className="project-grid">
         {projects.map((project) => (
           <article className="project-card" key={project.id}>
-            <img src={`${import.meta.env.BASE_URL}${project.image}`} alt={`Screenshot af ${project.title}`} />
+            <img
+              src={`${import.meta.env.BASE_URL}${project.image}`}
+              alt={`Screenshot af ${project.title}`}
+            />
             <div>
               <p className="eyebrow">{project.year}</p>
               <h2>{project.title}</h2>
@@ -435,7 +494,7 @@ Opdater `src/pages/ProjectDetail.jsx`:
 
 ```jsx
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router";
 
 function ProjectDetail() {
   const { id } = useParams();
@@ -465,7 +524,10 @@ function ProjectDetail() {
     <section className="page project-detail">
       <Link to="/projects">Tilbage til projekter</Link>
 
-      <img src={`${import.meta.env.BASE_URL}${project.image}`} alt={`Screenshot af ${project.title}`} />
+      <img
+        src={`${import.meta.env.BASE_URL}${project.image}`}
+        alt={`Screenshot af ${project.title}`}
+      />
       <p className="eyebrow">{project.year}</p>
       <h1>{project.title}</h1>
       <p>{project.details}</p>
@@ -508,12 +570,7 @@ Du kan starte med global CSS i `src/index.css`:
 
 body {
   margin: 0;
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #1f2933;
   background: #f7f4ef;
 }
@@ -640,6 +697,7 @@ Opdater `package.json`, så `scripts` indeholder:
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "lint": "oxlint",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
@@ -662,13 +720,13 @@ export default defineConfig({
 Når repoet hedder `[brugernavn].github.io`, skal `base` være:
 
 ```js
-base: "/";
+base: "/"
 ```
 
 Hvis du senere deployer et andet projekt til et almindeligt repo, skal `base` typisk være:
 
 ```js
-base: "/repo-navn/";
+base: "/repo-navn/"
 ```
 
 Byg projektet lokalt:
@@ -683,13 +741,7 @@ Test buildet:
 npm run preview
 ```
 
-Hvis det virker, så commit og push din kildekode:
-
-```bash
-git add .
-git commit -m "Add React portfolio"
-git push origin main
-```
+Hvis det virker, så commit og push din kildekode med GitHub Desktop.
 
 Deploy derefter den byggede version:
 
@@ -723,13 +775,9 @@ Det kan tage et par minutter, før ændringerne er synlige.
 
 Hver gang du har lavet ændringer, som skal online:
 
-```bash
-npm run build
-git add .
-git commit -m "Update portfolio"
-git push origin main
-npm run deploy
-```
+1. Kør `npm run build` i terminalen.
+2. Commit og push dine ændringer med GitHub Desktop.
+3. Kør `npm run deploy` i terminalen.
 
 `npm run deploy` bygger også projektet automatisk via `predeploy`, men det er en god vane at køre `npm run build` først, så du opdager fejl, før du deployer.
 
