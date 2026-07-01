@@ -1,34 +1,43 @@
-# Portfolio med React, Vite og GitHub Pages
+# React Portfolio Template
 
-Denne guide hjælper dig med at lave en personlig portfolio, som kan ligge gratis online på GitHub Pages.
+En simpel React + Vite portfolio-template, du kan bruge til at komme godt i gang med dit portfolioprojekt. Projektet deployes automatisk til GitHub Pages, når der pushes til `main`.
 
-Du kommer til at bruge:
+Templaten er lavet til repositories med navnet:
 
-- React til komponenter og sider
-- Vite til udvikling og build
-- React Router til navigation
-- GitHub Pages til hosting
-- en simpel JSON-fil til dine projekter
+```text
+[brugernavn].github.io
+```
 
-Målet er ikke at lave den perfekte portfolio på første forsøg. Målet er at få en fungerende version online, som du derefter kan udvikle, designe og gøre personlig.
+Det betyder, at portfolioen kommer til at ligge på:
+
+```text
+https://[brugernavn].github.io
+```
+
+## Hvad projektet indeholder
+
+- React 19 + Vite 8
+- React Router (`react-router`)
+- Sider til forside, projekter, projektdetalje, om mig, kontakt og 404
+- Projektdata i `src/data/projects.js`
+- GitHub Actions deployment i `.github/workflows/deploy.yml`
+- GitHub Pages fallback via `dist/404.html`
 
 ## Eksempler fra tidligere studerende
 
-Her er eksempler på portfolioer, der bygger på samme type opsætning:
+Når portfolioen er deployet, kommer den til at ligge på:
+
+```text
+https://[brugernavn].github.io
+```
+
+Her er eksempler på tidligere studerendes deployede portfolioer:
 
 - [stinelock.github.io](https://stinelock.github.io/)
 - [sofienholm.github.io](https://sofienholm.github.io/)
 - [runedrummer81.github.io](https://runedrummer81.github.io/)
 
-Kig på dem, før du designer din egen. Læg mærke til:
-
-- hvordan forsiden præsenterer personen
-- hvordan projekterne er organiseret
-- hvordan navigationen fungerer
-- hvor meget tekst der er på hvert projekt
-- hvordan billeder, farver og typografi skaber en visuel identitet
-
-Din portfolio skal ikke ligne de andres. Brug dem som inspiration til struktur, niveau og ambitionsretning.
+Eksemplerne viser, hvordan URL'en ser ud, når sitet er publiceret med GitHub Pages.
 
 ## Før du starter
 
@@ -39,26 +48,14 @@ Guiden antager, at du allerede har:
 - GitHub Desktop
 - en GitHub-konto
 
-Du skal arbejde i GitHub, GitHub Desktop, VS Code og terminalen i VS Code undervejs.
+## 1. Opret repository på GitHub
 
-## Overblik over processen
-
-1. Opret et GitHub-repository med navnet `[dit-brugernavn].github.io`.
-2. Klon repoet med GitHub Desktop.
-3. Opret et React-projekt med Vite.
-4. Tilføj sider og navigation med React Router.
-5. Tilføj dine projekter i en JSON-fil.
-6. Byg projektet og deploy det til GitHub Pages.
-7. Arbejd videre med design, indhold og detaljer.
-
-## 1. Opret dit repository på GitHub
-
-Gå til GitHub og opret et nyt repository.
+Opret et nyt repository på GitHub.
 
 Repository-navnet skal være dit GitHub-brugernavn efterfulgt af `.github.io`:
 
 ```text
-[dit-brugernavn].github.io
+[brugernavn].github.io
 ```
 
 Hvis dit GitHub-brugernavn er `sofieholm`, skal repository-navnet være:
@@ -67,37 +64,40 @@ Hvis dit GitHub-brugernavn er `sofieholm`, skal repository-navnet være:
 sofieholm.github.io
 ```
 
-Det navn er vigtigt, fordi GitHub Pages så automatisk udgiver din portfolio på:
-
-```text
-https://[dit-brugernavn].github.io
-```
-
 Vælg:
 
 - `Public`
 
 Klik derefter på `Create repository`.
 
-## 2. Klon repoet med GitHub Desktop
+## 2. Klon med GitHub Desktop
 
-Når repositoryet er oprettet på GitHub, skal du hente det ned på din computer.
-
-Gør sådan:
+Når repositoryet er oprettet:
 
 1. Gå ind på dit nye repository på GitHub.
-2. Klik på den grønne `Code`-knap.
-3. Vælg `Open with GitHub Desktop`.
-4. GitHub Desktop åbner nu repositoryet.
+2. Kontroller, at repository-navnet er fuldstændig magen til dit GitHub-brugernavn efterfulgt af `.github.io`.
+3. Klik på den grønne `Code`-knap.
+4. Vælg `Open with GitHub Desktop`.
 5. Vælg, hvor projektmappen skal ligge på din computer.
 6. Klik på `Clone`.
+7. Klik på `Open in Visual Studio Code` i GitHub Desktop.
 
-Når repoet er klonet:
+Eksempel:
 
-1. Klik på `Open in Visual Studio Code` i GitHub Desktop.
-2. Projektet åbner nu i VS Code.
+```text
+sofieholm.github.io
+```
 
-Fra nu af arbejder du i VS Code. GitHub Desktop bruges senere til at committe og pushe dine ændringer.
+Hvis dit brugernavn er `sofieholm`, må repoet ikke hedde:
+
+```text
+portfolio
+sofie-portfolio
+sofieholm
+sofieholm.github
+```
+
+Fra nu af arbejder du i VS Code. GitHub Desktop bruges til at committe og pushe ændringer.
 
 ## 3. Opret React-projekt med Vite
 
@@ -105,12 +105,6 @@ Fra nu af arbejder du i VS Code. GitHub Desktop bruges senere til at committe og
 
 ```text
 Terminal -> New Terminal
-```
-
-Terminalen skal stå i din portfolio-mappe. Mappen hedder typisk det samme som dit repository:
-
-```text
-[dit-brugernavn].github.io
 ```
 
 Kør denne kommando:
@@ -121,60 +115,27 @@ npm create vite@latest .
 
 Vigtigt: punktummet til sidst skal med.
 
-Punktummet betyder: opret React-projektet i den mappe, du allerede står i.
+Punktummet betyder, at Vite skal oprette React-projektet i den mappe, du allerede står i. Hvis du glemmer punktummet, kan du komme til at oprette en ekstra mappe inde i portfolio-mappen.
 
-Hvis du glemmer punktummet, kan du komme til at oprette en ekstra mappe inde i din portfolio-mappe. Det giver en besværlig struktur som:
-
-```text
-sofieholm.github.io/
-  sofieholm.github.io/
-    src/
-    package.json
-```
-
-Den struktur skal du undgå. Den rigtige struktur er:
+Når Vite spørger, skal du vælge:
 
 ```text
-sofieholm.github.io/
-  src/
-  public/
-  package.json
-```
-
-Når Vite stiller spørgsmål i terminalen, skal du vælge:
-
-Brug piletasterne til at vælge og tryk `Enter` for at bekræfte.
-
-```text
-Need to install the following packages:
-create-vite@...
-Ok to proceed? (y)
-```
-
-Skriv `y` og tryk `Enter`.
-
-Hvis terminalen skriver:
-
-```text
-Current directory is not empty. Please choose how to proceed:
-```
-
-Vælg:
-
-```text
-Ignore files and continue
-```
-
-Vælg derefter:
-
-```text
-Select a framework: React
-Select a variant: JavaScript
+Ok to proceed? y
+Current directory is not empty: Ignore files and continue
+Framework: React
+Variant: JavaScript
 Use ESLint instead of Oxlint? No (Oxlint)
 Install with npm and start now? Yes
 ```
 
-Når du vælger `Yes` til `Install with npm and start now?`, installerer Vite automatisk dependencies og starter projektet.
+Hvis du vælger `Yes` til `Install with npm and start now?`, installerer Vite dependencies og starter udviklingsserveren automatisk.
+
+Hvis du vælger `No`, skal du selv køre:
+
+```bash
+npm install
+npm run dev
+```
 
 Åbn den lokale URL i browseren. Den er typisk:
 
@@ -182,41 +143,15 @@ Når du vælger `Yes` til `Install with npm and start now?`, installerer Vite au
 http://localhost:5173
 ```
 
-Hvis du valgte `No` til `Install with npm and start now?`, skal du selv køre:
+Når du kan se Vite-startsiden, virker projektet.
 
-```bash
-npm install
-npm run dev
+Stop udviklingsserveren igen med:
+
+```text
+Ctrl + C
 ```
 
-Checkpoint:
-
-- Du kan se Vite/React-startsiden i browseren.
-- Terminalen viser ingen fejl.
-- Du kan stoppe serveren med `Ctrl + C`.
-
-## 4. Ryd op i standardprojektet
-
-Vite opretter lidt eksempelindhold, som du ikke behøver.
-
-Du kan slette:
-
-- `src/assets/react.svg`
-- `public/vite.svg`
-
-Du kan derefter forenkle:
-
-- `src/App.jsx`
-- `src/App.css`
-- `src/index.css`
-
-Det vigtigste er, at projektet stadig kan køre med:
-
-```bash
-npm run dev
-```
-
-## 5. Installer React Router
+## 4. Installer React Router
 
 Installer React Router:
 
@@ -224,658 +159,236 @@ Installer React Router:
 npm install react-router
 ```
 
-Vi bruger pakken `react-router`. I nyere React Router skal du ikke installere eller importere fra `react-router-dom`.
+## 5. Ryd op i Vite-standardprojektet
 
-Opret en mappe til sider:
+Vite opretter en startside med demo-indhold. Det skal ryddes væk, så portfolioen starter simpelt.
+
+Slet disse filer og mapper, hvis de findes:
+
+```text
+src/assets/
+src/App.css
+public/icons.svg
+public/vite.svg
+```
+
+Behold disse filer, fordi de skal ændres senere:
+
+```text
+src/App.jsx
+src/main.jsx
+src/index.css
+index.html
+vite.config.js
+package.json
+```
+
+## 6. Opret portfolio-strukturen
+
+Opret disse mapper:
+
+```text
+.github/workflows/
+src/components/
+src/data/
+src/pages/
+```
+
+Du kan oprette dem i VS Code ved at højreklikke i filoversigten og vælge `New Folder`.
+
+Du kan også oprette dem i terminalen:
 
 ```bash
-mkdir src/pages
+mkdir -p .github/workflows src/components src/data src/pages
 ```
 
-Opret disse filer:
+## 7. Opret og erstat filer
+
+Når du har ryddet op, skal projektet ende med filerne herunder.
+
+Opret disse nye filer:
 
 ```text
-src/pages/Home.jsx
-src/pages/Projects.jsx
-src/pages/ProjectDetail.jsx
-src/pages/About.jsx
-src/pages/Contact.jsx
+.github/workflows/deploy.yml
+public/portfolio-placeholder.svg
+src/components/Navbar.jsx
+src/data/projects.js
+src/pages/HomePage.jsx
+src/pages/ProjectsPage.jsx
+src/pages/ProjectPage.jsx
+src/pages/AboutPage.jsx
+src/pages/ContactPage.jsx
+src/pages/NotFoundPage.jsx
 ```
 
-## 6. Sæt routing op
-
-GitHub Pages fungerer som statisk hosting. Derfor er `HashRouter` den nemmeste løsning til portfolios på GitHub Pages.
-
-Med `HashRouter` får undersider adresser som:
+Erstat indholdet i disse eksisterende filer:
 
 ```text
-https://[dit-brugernavn].github.io/#/projects
-https://[dit-brugernavn].github.io/#/projects/miniprojekt
+src/App.jsx
+src/main.jsx
+src/index.css
+index.html
+vite.config.js
 ```
 
-Det ser lidt anderledes ud på grund af `#`, men det virker stabilt på GitHub Pages, også når man refresher siden eller deler et direkte link.
+Vigtigt:
 
-Opdater `src/main.jsx`:
+- `src/App.jsx` skal ikke længere importere `useState`, React-logoer eller `App.css`.
+- `src/main.jsx` skal importere `BrowserRouter` fra `react-router`.
+- `src/index.css` bliver den globale CSS-fil for hele portfolioen.
+- `.github/workflows/deploy.yml` sørger for automatisk deployment til GitHub Pages.
 
-```jsx
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { HashRouter } from "react-router";
-import App from "./App";
-import "./index.css";
+## 8. Test projektet lokalt
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <HashRouter>
-      <App />
-    </HashRouter>
-  </StrictMode>
-);
-```
-
-Opdater `src/App.jsx`:
-
-```jsx
-import { NavLink, Route, Routes } from "react-router";
-import Home from "./pages/Home";
-import Projects from "./pages/Projects";
-import ProjectDetail from "./pages/ProjectDetail";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-
-function App() {
-  return (
-    <>
-      <header className="site-header">
-        <NavLink to="/" className="logo">
-          Mit navn
-        </NavLink>
-
-        <nav className="site-nav">
-          <NavLink to="/" end>
-            Forside
-          </NavLink>
-          <NavLink to="/projects">Projekter</NavLink>
-          <NavLink to="/about">Om mig</NavLink>
-          <NavLink to="/contact">Kontakt</NavLink>
-        </nav>
-      </header>
-
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:id" element={<ProjectDetail />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </main>
-    </>
-  );
-}
-
-export default App;
-```
-
-## 7. Lav de første sider
-
-Start med en simpel version. Du kan altid gøre den pænere bagefter.
-
-`src/pages/Home.jsx`:
-
-```jsx
-function Home() {
-  return (
-    <section className="page">
-      <p className="eyebrow">Portfolio</p>
-      <h1>Hej, jeg hedder Dit Navn.</h1>
-      <p>
-        Jeg arbejder med frontend, design og digitale produkter. Her kan du se
-        nogle af de projekter, jeg har lavet.
-      </p>
-    </section>
-  );
-}
-
-export default Home;
-```
-
-`src/pages/About.jsx`:
-
-```jsx
-function About() {
-  return (
-    <section className="page">
-      <h1>Om mig</h1>
-      <p>
-        Skriv kort om, hvem du er, hvad du er nysgerrig på, og hvilke typer
-        projekter du gerne vil arbejde med.
-      </p>
-    </section>
-  );
-}
-
-export default About;
-```
-
-`src/pages/Contact.jsx`:
-
-```jsx
-function Contact() {
-  return (
-    <section className="page">
-      <h1>Kontakt</h1>
-      <p>Du kan kontakte mig på mail eller finde mig på GitHub og LinkedIn.</p>
-      <ul>
-        <li>
-          <a href="mailto:dinmail@example.com">dinmail@example.com</a>
-        </li>
-        <li>
-          <a href="https://github.com/[dit-brugernavn]">GitHub</a>
-        </li>
-      </ul>
-    </section>
-  );
-}
-
-export default Contact;
-```
-
-Checkpoint:
-
-- Navigationen virker lokalt.
-- Du kan gå til forsiden, projekter, om mig og kontakt.
-- URL'en ændrer sig, når du klikker rundt.
-
-## 8. Tilføj projektdata
-
-Opret filen:
-
-```text
-public/projects.json
-```
-
-Indsæt eksempeldata:
-
-```json
-[
-  {
-    "id": "portfolio",
-    "title": "Portfolio Website",
-    "year": 2026,
-    "description": "Min personlige portfolio bygget med React, Vite og GitHub Pages.",
-    "details": "I dette projekt har jeg arbejdet med komponenter, routing, JSON-data, responsive layouts og deployment.",
-    "tags": ["React", "Vite", "GitHub Pages"],
-    "image": "img/portfolio.webp",
-    "links": [
-      {
-        "url": "https://[dit-brugernavn].github.io",
-        "text": "Live site"
-      },
-      {
-        "url": "https://github.com/[dit-brugernavn]/[dit-brugernavn].github.io",
-        "text": "GitHub repo"
-      }
-    ]
-  }
-]
-```
-
-Læg billeder i:
-
-```text
-public/img/
-```
-
-Brug korte filnavne uden mellemrum:
-
-```text
-portfolio.webp
-todo-app.webp
-weather-app.webp
-```
-
-God praksis:
-
-- Brug `webp`, `jpg` eller `png`.
-- Gør billederne mindre, før du lægger dem i projektet.
-- Brug samme format og nogenlunde samme proportioner til projektbilleder.
-- Undgå filnavne som `Skærmbillede 2026-01-21 kl. 14.03.22.png`.
-
-## 9. Vis projekter fra JSON
-
-Opdater `src/pages/Projects.jsx`:
-
-```jsx
-import { useEffect, useState } from "react";
-import { Link } from "react-router";
-
-function Projects() {
-  const [projects, setProjects] = useState([]);
-
-  useEffect(() => {
-    async function getProjects() {
-      const response = await fetch(`${import.meta.env.BASE_URL}projects.json`);
-      const data = await response.json();
-      setProjects(data);
-    }
-
-    getProjects();
-  }, []);
-
-  return (
-    <section className="page">
-      <h1>Projekter</h1>
-
-      <div className="project-grid">
-        {projects.map((project) => (
-          <article className="project-card" key={project.id}>
-            <img
-              src={`${import.meta.env.BASE_URL}${project.image}`}
-              alt={`Screenshot af ${project.title}`}
-            />
-            <div>
-              <p className="eyebrow">{project.year}</p>
-              <h2>{project.title}</h2>
-              <p>{project.description}</p>
-              <Link to={`/projects/${project.id}`}>Se projekt</Link>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export default Projects;
-```
-
-Opdater `src/pages/ProjectDetail.jsx`:
-
-```jsx
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
-
-function ProjectDetail() {
-  const { id } = useParams();
-  const [project, setProject] = useState(null);
-
-  useEffect(() => {
-    async function getProject() {
-      const response = await fetch(`${import.meta.env.BASE_URL}projects.json`);
-      const data = await response.json();
-      const selectedProject = data.find((item) => item.id === id);
-      setProject(selectedProject);
-    }
-
-    getProject();
-  }, [id]);
-
-  if (!project) {
-    return (
-      <section className="page">
-        <h1>Projektet blev ikke fundet</h1>
-        <Link to="/projects">Tilbage til projekter</Link>
-      </section>
-    );
-  }
-
-  return (
-    <section className="page project-detail">
-      <Link to="/projects">Tilbage til projekter</Link>
-
-      <img
-        src={`${import.meta.env.BASE_URL}${project.image}`}
-        alt={`Screenshot af ${project.title}`}
-      />
-      <p className="eyebrow">{project.year}</p>
-      <h1>{project.title}</h1>
-      <p>{project.details}</p>
-
-      <ul className="tag-list">
-        {project.tags.map((tag) => (
-          <li key={tag}>{tag}</li>
-        ))}
-      </ul>
-
-      <div className="project-links">
-        {project.links.map((link) => (
-          <a href={link.url} key={link.url}>
-            {link.text}
-          </a>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export default ProjectDetail;
-```
-
-Checkpoint:
-
-- Projekterne vises på `/projects`.
-- Hvert projekt linker til sin egen detaljeside.
-- Billederne loader både lokalt og efter deploy.
-- Hvis du ændrer `projects.json`, ændrer indholdet sig på sitet.
-
-## 10. Tilføj en enkel CSS-start
-
-Du kan starte med global CSS i `src/index.css`:
-
-```css
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #1f2933;
-  background: #f7f4ef;
-}
-
-a {
-  color: inherit;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-.site-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem clamp(1rem, 5vw, 4rem);
-  border-bottom: 1px solid #ded8cf;
-}
-
-.logo {
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.site-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.site-nav a {
-  text-decoration: none;
-}
-
-.site-nav a.active {
-  text-decoration: underline;
-  text-underline-offset: 0.35rem;
-}
-
-.page {
-  width: min(100% - 2rem, 1100px);
-  margin: 0 auto;
-  padding: 4rem 0;
-}
-
-.eyebrow {
-  margin: 0 0 0.5rem;
-  color: #6b7280;
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-}
-
-.project-card {
-  overflow: hidden;
-  border: 1px solid #ded8cf;
-  border-radius: 0.75rem;
-  background: #fffaf3;
-}
-
-.project-card div {
-  padding: 1rem;
-}
-
-.project-card img {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-}
-
-.project-detail img {
-  width: 100%;
-  max-height: 520px;
-  object-fit: cover;
-  border-radius: 0.75rem;
-  margin-bottom: 2rem;
-}
-
-.tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: 0;
-  list-style: none;
-}
-
-.tag-list li {
-  padding: 0.35rem 0.7rem;
-  border: 1px solid #ded8cf;
-  border-radius: 999px;
-  background: white;
-}
-
-.project-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-```
-
-Denne CSS er kun et udgangspunkt. Når setuppet virker, bør du ændre farver, typografi, spacing og layout, så portfolioen passer til dig.
-
-## 11. Deploy til GitHub Pages
-
-Installer deployment-pakken:
+Start udviklingsserveren:
 
 ```bash
-npm install -D gh-pages
+npm run dev
 ```
 
-Opdater `package.json`, så `scripts` indeholder:
+Tjek disse sider i browseren:
 
-```json
+```text
+http://localhost:5173/
+http://localhost:5173/projects
+http://localhost:5173/projects/portfolio
+http://localhost:5173/about
+http://localhost:5173/contact
+```
+
+## Scripts
+
+```bash
+npm run dev      # start lokal udviklingsserver
+npm run build    # lav production build
+npm run preview  # test production build lokalt
+npm run lint     # kør Oxlint
+```
+
+## Projektstruktur efter oprydning
+
+```text
+.github/
+  workflows/
+    deploy.yml
+public/
+  portfolio-placeholder.svg
+src/
+  components/
+    Navbar.jsx
+  data/
+    projects.js
+  pages/
+    HomePage.jsx
+    ProjectsPage.jsx
+    ProjectPage.jsx
+    AboutPage.jsx
+    ContactPage.jsx
+    NotFoundPage.jsx
+  App.jsx
+  main.jsx
+  index.css
+```
+
+Hvis du stadig har `src/assets/`, `src/App.css` eller Vite-demoindhold i `src/App.jsx`, er oprydningen ikke færdig.
+
+## Routing
+
+Routes er defineret i `src/App.jsx`:
+
+```text
+/                  -> HomePage
+/projects          -> ProjectsPage
+/projects/:slug    -> ProjectPage
+/about             -> AboutPage
+/contact           -> ContactPage
+*                  -> NotFoundPage
+```
+
+Portfolioen får URL'er som:
+
+```text
+https://[brugernavn].github.io/projects
+https://[brugernavn].github.io/projects/portfolio
+```
+
+For at refresh og direkte links til undersider virker på GitHub Pages, kopierer workflowet automatisk `dist/index.html` til `dist/404.html` efter build.
+
+## Projektdata
+
+Projekterne ligger i:
+
+```text
+src/data/projects.js
+```
+
+Tilføj, fjern eller ret projekter i arrayet:
+
+```js
 {
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "oxlint",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
-  }
+  slug: "portfolio",
+  title: "Portfolio",
+  year: "2026",
+  summary: "Kort tekst til projektkortet.",
+  description: "Længere tekst til projektsiden.",
+  tags: ["React", "Vite", "GitHub Pages"],
+  image: `${import.meta.env.BASE_URL}portfolio-placeholder.svg`,
+  links: [
+    {
+      label: "Live site",
+      href: "https://brugernavn.github.io",
+    },
+  ],
 }
 ```
 
-Opdater `vite.config.js`:
-
-```js
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-
-export default defineConfig({
-  plugins: [react()],
-  base: "/"
-});
-```
-
-Når repoet hedder `[brugernavn].github.io`, skal `base` være:
-
-```js
-base: "/"
-```
-
-Hvis du senere deployer et andet projekt til et almindeligt repo, skal `base` typisk være:
-
-```js
-base: "/repo-navn/"
-```
-
-Byg projektet lokalt:
-
-```bash
-npm run build
-```
-
-Test buildet:
-
-```bash
-npm run preview
-```
-
-Hvis det virker, så commit og push din kildekode med GitHub Desktop.
-
-Deploy derefter den byggede version:
-
-```bash
-npm run deploy
-```
-
-Gå derefter til GitHub:
+`slug` bruges i URL'en. Hvis `slug` er `"portfolio"`, bliver projektets URL:
 
 ```text
-Repository -> Settings -> Pages
+/projects/portfolio
 ```
 
-Vælg:
+## Deployment til GitHub Pages
+
+Deployment styres af:
 
 ```text
-Source: Deploy from a branch
-Branch: gh-pages
-Folder: / (root)
+.github/workflows/deploy.yml
 ```
 
-Når GitHub er færdig, ligger portfolioen på:
+Workflowet kører automatisk, når der pushes til `main`.
+
+Det gør fire ting:
+
+1. Installerer dependencies med `npm ci`.
+2. Bygger projektet med `npm run build`.
+3. Kopierer `dist/index.html` til `dist/404.html`, så React Router virker på refresh.
+4. Deployer `dist` til GitHub Pages.
+
+Første gang skal GitHub Pages sættes til GitHub Actions:
 
 ```text
-https://[dit-brugernavn].github.io
+Repository -> Settings -> Pages -> Source -> GitHub Actions
 ```
 
-Det kan tage et par minutter, før ændringerne er synlige.
+Når det er gjort, deployer siden automatisk ved hvert push til `main`.
 
-## 12. Når du vil opdatere portfolioen
+## Når du vil opdatere portfolioen
 
-Hver gang du har lavet ændringer, som skal online:
+1. Ret indhold eller kode i VS Code.
+2. Test lokalt med `npm run dev`.
+3. Kør gerne `npm run build`, så du opdager fejl før push.
+4. Commit og push ændringerne med GitHub Desktop.
+5. GitHub Actions deployer automatisk til GitHub Pages.
 
-1. Kør `npm run build` i terminalen.
-2. Commit og push dine ændringer med GitHub Desktop.
-3. Kør `npm run deploy` i terminalen.
+## Tilpasning
 
-`npm run deploy` bygger også projektet automatisk via `predeploy`, men det er en god vane at køre `npm run build` først, så du opdager fejl, før du deployer.
+Start her:
 
-Kort sagt:
+- Ret navn og navigation i `src/components/Navbar.jsx`.
+- Ret forsidetekst i `src/pages/HomePage.jsx`.
+- Ret projekter i `src/data/projects.js`.
+- Ret farver, typografi og layout i `src/index.css`.
+- Ret kontaktlinks i `src/pages/ContactPage.jsx`.
 
-- `main` indeholder din kildekode.
-- `gh-pages` indeholder den byggede version, som GitHub Pages viser online.
-
-Du arbejder normalt kun i `main`. `gh-pages` bliver håndteret af `npm run deploy`.
-
-## Typiske fejl og fixes
-
-### Siden er blank efter deploy
-
-Tjek:
-
-- at `vite.config.js` har `base: "/"`
-- at du har kørt `npm run deploy`
-- at GitHub Pages bruger branch `gh-pages`
-- at browserens console ikke viser fejl om manglende `.js`- eller `.css`-filer
-
-### Billeder vises lokalt, men ikke online
-
-Tjek:
-
-- at billeder ligger i `public/img`
-- at filnavne matcher præcist, inklusive store og små bogstaver
-- at stier i JSON ikke starter med `/`
-
-Brug:
-
-```json
-"image": "img/portfolio.webp"
-```
-
-Ikke:
-
-```json
-"image": "/img/portfolio.webp"
-```
-
-### Undersider giver 404 efter refresh
-
-Brug `HashRouter` i `src/main.jsx`.
-
-Hvis du bruger `BrowserRouter`, skal du lave ekstra fallback-opsætning til GitHub Pages. Det er ikke nødvendigt i denne guide.
-
-### Ændringer kommer ikke online
-
-Husk at:
-
-```bash
-npm run deploy
-```
-
-skal køres igen, hver gang en ny version skal publiceres.
-
-### `npm run deploy` fejler
-
-Prøv først:
-
-```bash
-npm run build
-```
-
-Hvis build fejler, skal fejlen rettes, før du kan deploye.
-
-## Hvad en god portfolio bør indeholde
-
-Minimum:
-
-- en tydelig forside med navn og faglig retning
-- en projektside med flere projekter
-- en detaljeside for hvert projekt
-- en kort om-mig-side
-- kontaktoplysninger
-- links til GitHub og eventuelt LinkedIn
-
-Gode projektsider svarer ofte på:
-
-- Hvad er projektet?
-- Hvorfor lavede du det?
-- Hvilke teknologier brugte du?
-- Hvad var din rolle?
-- Hvad lærte du?
-- Hvad ville du forbedre næste gang?
-
-## Forslag til videre arbejde
-
-Når den første version virker, kan du arbejde videre med:
-
-- bedre visuel identitet
-- responsivt design til mobil
-- dark mode
-- filtrering af projekter efter tags
-- animationer og mikrointeraktioner
-- bedre billeder og projektbeskrivelser
-- SEO med god titel og meta-description
-- accessibility med semantisk HTML, alt-tekster og god kontrast
-
-Start simpelt, få det online, og byg derefter videre. En portfolio bliver god gennem iteration.
+Hold første version simpel. Få den online, og byg derefter videre.
