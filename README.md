@@ -530,7 +530,57 @@ Ret:
 - `<title>`
 - `meta name="description"`
 
-## 11. Når du vil opdatere portfolioen
+## 11. Ryd op i guiden
+
+Når din portfolio virker, og du ikke længere har brug for denne guide i dit eget repository, kan du rydde op. Vent med dette trin, til du er færdig med at bruge guiden.
+
+Guiden ligger i:
+
+```text
+README.md
+```
+
+Billederne til guiden ligger i:
+
+```text
+docs/
+```
+
+Du kan bruge `README.md` som template til en kort beskrivelse af din portfolio i stedet.
+
+Åbn:
+
+```text
+README.md
+```
+
+Slet guide-teksten, og erstat den fx med:
+
+```md
+# Min portfolio
+
+Dette er min portfolio bygget med React, Vite og React Router.
+
+Portfolioen ligger her:
+
+https://[dit-github-brugernavn].github.io
+
+## Projekter
+
+Her samler jeg udvalgte projekter, proces og det, jeg lærer undervejs.
+```
+
+Slet derefter `docs`-mappen i VS Code:
+
+1. Find `docs` i Explorer-panelet.
+2. Højreklik på mappen.
+3. Vælg `Delete`.
+
+`docs`-mappen indeholder kun billeder til denne guide. Den er ikke nødvendig for selve portfolioen.
+
+Commit og push oprydningen, når du er færdig.
+
+## 12. Når du vil opdatere portfolioen
 
 Hver gang du vil ændre portfolioen:
 
