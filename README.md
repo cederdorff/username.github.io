@@ -2,7 +2,7 @@
 
 Dette repository er en React portfolio-template til GitHub Pages.
 
-Studerende skal bruge templaten til at oprette deres eget repository med navnet:
+Brug templaten til at oprette dit eget repository med navnet:
 
 ```text
 [dit-github-brugernavn].github.io
@@ -37,9 +37,9 @@ Navnet `username.github.io` er kun et eksempelnavn i templaten. Når du opretter
 - styling i `src/index.css`
 - automatisk deployment til GitHub Pages med `.github/workflows/deploy.yml`
 
-## Eksempler fra tidligere studerende
+## Eksempler på deployede portfolioer
 
-Her er eksempler på tidligere studerendes deployede portfolioer:
+Her er eksempler på portfolioer, der er deployet på samme type URL:
 
 - [stinelock.github.io](https://stinelock.github.io/)
 - [sofienholm.github.io](https://sofienholm.github.io/)
@@ -53,7 +53,7 @@ Guiden antager, at du allerede har:
 
 - Node.js og `npm`
 - VS Code
-- GitHub Desktop
+- GitHub Desktop eller Git i VS Code
 - en GitHub-konto
 
 Du skal ikke oprette et Vite-projekt selv. Du skal bruge templaten.
@@ -123,7 +123,7 @@ Når dit repository er oprettet:
 6. Klik på `Clone`.
 7. Klik på `Open in Visual Studio Code` i GitHub Desktop.
 
-Fra nu af arbejder du primært i VS Code. GitHub Desktop bruges til at committe og pushe ændringer.
+Fra nu af arbejder du primært i VS Code. Du kan committe og pushe med GitHub Desktop eller med Source Control i VS Code.
 
 ## 3. Installer projektet lokalt
 
@@ -171,7 +171,118 @@ Når du er færdig med at teste, kan du stoppe serveren i terminalen:
 Ctrl + C
 ```
 
-## 5. Tilpas portfolioen
+## 5. Lav en lille ændring
+
+Før du tilpasser hele portfolioen, skal du lave én lille ændring og deploye den. På den måde tester du hurtigt, at GitHub Pages virker.
+
+Åbn:
+
+```text
+src/pages/HomePage.jsx
+```
+
+Find teksten:
+
+```jsx
+<h1>Hej, jeg hedder Dit Navn.</h1>
+```
+
+Ret den til noget simpelt, fx:
+
+```jsx
+<h1>Hej, jeg hedder Sofie.</h1>
+```
+
+Gem filen.
+
+## 6. Test før du pusher første gang
+
+Kør:
+
+```bash
+npm run dev
+```
+
+Åbn siden i browseren:
+
+```text
+http://localhost:5173/
+```
+
+Tjek at din lille tekstændring vises.
+
+Når det virker, kan du stoppe serveren i terminalen:
+
+```text
+Ctrl + C
+```
+
+## 7. Slå GitHub Pages til
+
+Første gang skal GitHub Pages sættes til GitHub Actions.
+
+Gå til dit repository på GitHub:
+
+```text
+Settings -> Pages
+```
+
+Vælg:
+
+```text
+Source: GitHub Actions
+```
+
+## 8. Commit og push
+
+Brug enten GitHub Desktop eller Source Control i VS Code.
+
+Med GitHub Desktop:
+
+1. Tjek at ændringerne vises i venstre side.
+2. Skriv en kort commit-besked, fx `Test GitHub Pages deployment`.
+3. Klik på `Commit to main`.
+4. Klik på `Push origin`.
+
+Med VS Code:
+
+1. Gå til `Source Control` i venstre side.
+2. Tjek at ændringerne vises.
+3. Skriv en kort commit-besked, fx `Test GitHub Pages deployment`.
+4. Klik på `Commit`.
+5. Klik på `Sync Changes` eller `Push`.
+
+Når du har pushet til `main`, kører deployment automatisk.
+
+Du kan se deployment under:
+
+```text
+Actions
+```
+
+Når deployment er færdig, ligger portfolioen på:
+
+```text
+https://[dit-github-brugernavn].github.io
+```
+
+Det kan tage et par minutter, før siden er online.
+
+## 9. Tjek din første deploy
+
+Åbn din portfolio i browseren:
+
+```text
+https://[dit-github-brugernavn].github.io
+```
+
+Tjek at den lille tekstændring fra trin 5 er synlig online.
+
+Hvis du kan se ændringen, virker deployment.
+
+## 10. Tilpas portfolioen
+
+Når deployment virker, kan du begynde at gøre portfolioen personlig.
 
 Start med disse filer:
 
@@ -354,73 +465,14 @@ Ret:
 - `<title>`
 - `meta name="description"`
 
-## 6. Test før du pusher
-
-Kør:
-
-```bash
-npm run build
-```
-
-Hvis build virker, er projektet klar til commit og push.
-
-Du kan også køre:
-
-```bash
-npm run dev
-```
-
-og klikke rundt lokalt en sidste gang.
-
-## 7. Commit og push med GitHub Desktop
-
-Gå til GitHub Desktop.
-
-1. Tjek at ændringerne vises i venstre side.
-2. Skriv en kort commit-besked, fx `Customize portfolio`.
-3. Klik på `Commit to main`.
-4. Klik på `Push origin`.
-
-## 8. Slå GitHub Pages til
-
-Første gang skal GitHub Pages sættes til GitHub Actions.
-
-Gå til dit repository på GitHub:
-
-```text
-Settings -> Pages
-```
-
-Vælg:
-
-```text
-Source: GitHub Actions
-```
-
-Når du har pushet til `main`, kører deployment automatisk.
-
-Du kan se deployment under:
-
-```text
-Actions
-```
-
-Når deployment er færdig, ligger portfolioen på:
-
-```text
-https://[dit-github-brugernavn].github.io
-```
-
-Det kan tage et par minutter, før siden er online.
-
-## 9. Når du vil opdatere portfolioen
+## 11. Når du vil opdatere portfolioen
 
 Hver gang du vil ændre portfolioen:
 
 1. Ret filerne i VS Code.
 2. Test lokalt med `npm run dev`.
 3. Kør gerne `npm run build`.
-4. Commit og push med GitHub Desktop.
+4. Commit og push med GitHub Desktop eller VS Code.
 5. GitHub Actions deployer automatisk.
 
 ## Typiske fejl
@@ -459,17 +511,3 @@ Tjek:
 - at linket matcher projektets slug
 - at projektet findes i arrayet
 - at du har skiftet `username` ud med dit eget GitHub-brugernavn i links
-
-## Til underviseren
-
-Template-repositoryet er:
-
-[github.com/cederdorff/username.github.io](https://github.com/cederdorff/username.github.io)
-
-For at de studerende kan bruge repoet som template:
-
-1. Gå til repositoryets `Settings`.
-2. Gå til `General`.
-3. Slå `Template repository` til.
-
-Når det er slået til, kan de studerende oprette deres eget `[dit-github-brugernavn].github.io` repository direkte fra templaten.
