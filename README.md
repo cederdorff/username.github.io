@@ -8,10 +8,10 @@ Brug templaten til at oprette dit eget repository med navnet:
 [dit-github-brugernavn].github.io
 ```
 
-Hvis dit GitHub-brugernavn er `hullabulla`, skal dit repository hedde:
+Hvis dit GitHub-brugernavn er `race-js`, skal dit repository hedde:
 
 ```text
-hullabulla.github.io
+race-js.github.io
 ```
 
 Når portfolioen er deployet, ligger den på:
@@ -55,7 +55,7 @@ Eksemplerne viser, hvordan URL'en ser ud, når sitet er publiceret med GitHub Pa
 
 Guiden antager, at du allerede har:
 
-- Node.js og `npm`
+- Node.js 22.22 eller nyere og `npm`
 - VS Code
 - GitHub Desktop eller Git i VS Code
 - en GitHub-konto
@@ -83,7 +83,7 @@ Udfyld:
 Eksempel:
 
 ```text
-hullabulla.github.io
+race-js.github.io
 ```
 
 ![Opret nyt repository fra templaten](docs/images/create-repository-from-template.png)
@@ -422,8 +422,8 @@ Eksempel på et projekt:
 Hvis dit GitHub-brugernavn er `race-js`, skal du ændre links til:
 
 ```js
-href: "https://race-js.github.io";
-href: "https://github.com/race-js/race-js.github.io";
+href: "https://race-js.github.io",
+href: "https://github.com/race-js/race-js.github.io",
 ```
 
 `slug` bliver brugt i URL'en.
@@ -467,7 +467,7 @@ public/todo-app.webp
 Så kan du bruge billedet i `src/data/projects.js`:
 
 ```js
-image: `${import.meta.env.BASE_URL}todo-app.webp`;
+image: `${import.meta.env.BASE_URL}todo-app.webp`,
 ```
 
 ### Brug om-mig-siden som template
@@ -619,6 +619,10 @@ Tjek:
 - at `Actions` er kørt færdig uden fejl
 - at `Settings -> Pages -> Source` står til `GitHub Actions`
 - at repositoryet er `Public`
+
+### `npm install` viser `Unsupported engine`
+
+Opdater Node.js og prøv igen. Projektet bruger React Router, som kræver en nyere version af Node.js.
 
 ### Et projektlink virker ikke
 
