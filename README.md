@@ -37,7 +37,9 @@ Billederne i guiden bruger GitHub-brugeren `race-js` som eksempel. Derfor hedder
 - styling i `src/index.css`
 - automatisk deployment til GitHub Pages med `.github/workflows/deploy.yml`
 
-## Eksempler på deployede portfolioer
+## Eksempler på deployede portfolioer på GitHub Pages
+
+GitHub Pages er gratis, hurtigt at sætte op og opdaterer automatisk dit website, når du pusher ændringer til GitHub. Samtidig viser du, at du arbejder med Git og GitHub.
 
 Her er en række eksempler på portfolioer, der er deployet på en `github.io`-adresse:
 
